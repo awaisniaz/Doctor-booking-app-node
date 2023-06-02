@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Client, Specialization } from "../models/client";
 const client_Controller = {
-    login: (req: Request, res: Response) => { },
+    // login: (req: Request, res: Response) => { },
     register: (req: Request, res: Response) => {
         const { client, specialization } = req.body;
         const newClient = new Client(client);
@@ -13,14 +13,14 @@ const client_Controller = {
                 if (data?.type == "user") {
                     res.status(201).json({ message: "User Created Successfully" });
                 } else {
-                    let specializationlist = specialization?.split(',')?.map((item: String) => {
+                    const specializationlist = specialization?.split(',')?.map((item: string) => {
                         return {
                             name: item,
                             doctor_id: data?._id
                         }
                     })
                     Specialization.insertMany(specializationlist)
-                        .then((data: any) => {
+                        .then(() => {
                             res.status(201).json({ message: "User Created Successfull" });
                         })
                         .catch((err: Error) => {
