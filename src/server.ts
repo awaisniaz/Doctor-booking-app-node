@@ -4,7 +4,7 @@ import clientrouter from './routers/client'
 
 const app = express()
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3000
 
 // Middleware to handle errors and respond with a status code and message
 app.use(express.json())
@@ -15,6 +15,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
         res.status(500).json({ message: err.message })
     }
 })
+
 app.use('/users', clientrouter)
 app.listen(PORT, () => {
     console.log(`Server is runnig on ${PORT}  🚀🚀🚀🚀`)
