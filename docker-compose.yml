@@ -1,27 +1,30 @@
 version: '3.8'
 
 services:
- node:
-  build:
-   context: .
-  ports:
-   - 3000:3000
-   - 9229:9292
-  environment:
-   - SERVER_PORT=3000
-   - CONNECTIONSTRING=mongodb://localhost:27017/Doctor-Booking-App
-  volumes:
-   - ./:/app
-   - /app/node_modules
-#   command: npm run debug
+   
+   #   command: npm run debug
 
- mongo:
-  image: mongo:4.2.8
-  ports:
-   - 27017:27017
-  volumes:
-   - mongodb:/data/db
-   - mongodb_config:/data/configdb
+   mongo:
+      container_name: mongo_db
+      image: mongo:4.2.8
+      ports:
+         - 27017:27017
+      volumes:
+         - mongodb:/data/db
+         - mongodb_config:/data/configdb
+   node:
+      build:
+         context: .
+      ports:
+         - 5000:3000
+      environment:
+         - SERVER_PORT=3000
+         - CONNECTIONSTRING=mongodb://mongo_db:27017/Doctor-Booking-App
+      depends_on:
+         - mongo
+      volumes:
+         - ./:/app
+         - /app/node_modules
 volumes:
- mongodb:
- mongodb_config:
+   mongodb:
+   mongodb_config:
