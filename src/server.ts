@@ -15,7 +15,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
         res.status(500).json({ message: err.message })
     }
 })
-
+app.get('/home', (req: Request, res: Response) => {
+    res.send("I am Connected")
+})
 app.use('/users', clientrouter)
 app.listen(PORT, () => {
     console.log(`Server is runnig on ${PORT}  🚀🚀🚀🚀`)
