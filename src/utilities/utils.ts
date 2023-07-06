@@ -2,12 +2,12 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 export const utilities = {
     generatePassword: async (password: string): Promise<string> => {
-        let saltRounds = 10
+        const saltRounds = 10
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         return hash
     },
-    validatePassword: async (hash: string, key: string): Promise<Boolean> => {
+    validatePassword: async (hash: string, key: string): Promise<boolean> => {
         const response = bcrypt.compareSync(key, hash); // true
         return response
     },
