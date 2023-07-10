@@ -8,6 +8,7 @@ import specialization_route from './routers/specialization.route';
 const app = express()
 const PORT = process.env.PORT || 3000
 
+app.use(express.urlencoded({ extended: true }));
 // Middleware to handle errors and respond with a status code and message
 app.use(express.json())
 app.use((req: Request, res: Response, next: NextFunction) => {

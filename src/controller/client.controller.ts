@@ -61,14 +61,15 @@ const client_Controller = {
             });
     },
     update_profile: async (req: Request, res: Response) => {
-        console.log(req['email'])
-        console.log(req?.body)
         Client?.findOneAndUpdate({ email: req['email']?.data }, req?.body, { new: true })
             .then((data: any) => {
                 return res.send({ message: "Update profile successfully", data: data })
             }).catch((err: Error) => {
                 return res.send({ message: err?.message })
             })
+    },
+    update_image: async (req: Request, res: Response) => {
+        res.send('Upload successful');
     }
 }
 
