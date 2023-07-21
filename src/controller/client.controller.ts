@@ -11,10 +11,10 @@ const client_Controller = {
         const validatePassword = await utilities?.validatePassword(user?.password, password)
         if (validatePassword == true) {
             const token = await utilities?.generateToken(user?.email)
-
+            const { password, ...withoutPassword } = user["_doc"]
             return res.send({
                 message: "Successfully found data",
-                data: { user: user, token }
+                data: { user: withoutPassword, token }
             })
         }
         else {
@@ -69,7 +69,7 @@ const client_Controller = {
             })
     },
     update_image: async (req: Request, res: Response) => {
-        res.send('Upload successful');
+        res.send({ "message": 'Upload successful' });
     }
 }
 
